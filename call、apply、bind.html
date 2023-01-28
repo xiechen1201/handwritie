@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function test() {
+        console.log(this, arguments);
+      }
+
+      test();
+      test.call({ name: "call" }, 1, 2, 3);
+      test.apply({ name: "apply" }, [1, 2, 3]);
+      test.bind({ name: "bind" }, 123)(456);
+
+      console.log("======分割========");
+
+      /* 实现 call 方法 */
+      Function.prototype.myCall = function (context) {
+        let prop = new Date().getTime();
+        let args = Array.from(arguments).slice(1);
+
+        context[prop] = this;
+        context[prop](...args);
+        delete context[prop];
+      };
+      test.myCall({ name: "myCall" }, 1, 2, 3);
+
+      /* 实现 apply */
+      Function.prototype.myApply = function (context) {
+        let prop = new Date().getTime();
+        let args = Array.from(arguments).slice(1);
+
+        context[prop] = this;
+        context[prop](...args[0]);
+        delete context[prop];
+      };
+      test.myApply({ name: "myApply" }, [1, 2, 3]);
+
+      /* 实现 bind */
+      Function.prototype.myBind = function (context) {
+        let prop = new Date().getTime();
+        let args = Array.from(arguments).slice(1);
+        context[prop] = this;
+
+        return function () {
+          let args2 = Array.from(arguments);
+          context[prop](...args, ...args2);
+        };
+      };
+      test.myBind({ name: "myBind" }, 123)(456);
+    </script>
+  </body>
+</html>
