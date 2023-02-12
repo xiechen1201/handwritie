@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS圣杯布局</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      .container {
+        height: 100%;
+        padding: 0 200px;
+      }
+      .middle {
+        width: 100%;
+        height: 100%;
+        background-color: aquamarine;
+      }
+      .left {
+        width: 200px;
+        height: 100%;
+        background-color: goldenrod;
+        margin-left: -100%;
+        left: -200px;
+      }
+      .right {
+        width: 200px;
+        height: 100%;
+        background-color: bisque;
+        margin-left: -200px;
+        right: -200px;
+      }
+      .column {
+        position: relative;
+        float: left;
+      }
+    </style>
+  </head>
+  <!-- 
+    圣杯布局与双飞翼布局，都是属于三列布局的经典布局。
+    双飞翼布局是圣杯布局的优化版，由淘宝UED提出
+    它们的效果图类似，但是实现方法不同。
+   -->
+  <body>
+    <div class="container">
+      <div class="column middle">4561212121212112121212121121212121211212121212112121212121</div>
+      <div class="column left"></div>
+      <div class="column right"></div>
+    </div>
+  </body>
+</html>
